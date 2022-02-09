@@ -13,7 +13,7 @@ import {
 } from "@trussworks/react-uswds";
 import { useExposure } from "../../hooks/exposure.hook";
 
-export const EngineerPage: FunctionComponent = () => {
+export const ExposurePage: FunctionComponent = () => {
   const navigate = useNavigate();
   const { data, fetch, isLoading } = useExposure();
 

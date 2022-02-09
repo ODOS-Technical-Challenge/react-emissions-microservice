@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { ExposureApi } from "../../api";
 
-import { EngineerPage } from "./engineer.page";
+import { ExposurePage } from "./exposure.page";
 
 jest.mock("../../api", () => ({ ExposureApi: { getAll: jest.fn() } }));
 
@@ -19,7 +19,7 @@ describe("Application Page: Search Page", () => {
   it("should handle rendering the component.", async () => {
     render(
       <BrowserRouter>
-        <EngineerPage />
+        <ExposurePage />
       </BrowserRouter>
     );
 

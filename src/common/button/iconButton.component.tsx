@@ -11,6 +11,7 @@ interface Props {
 
   appearance?: "muted" | "default" | "success";
   iconSize?: number;
+  style?: React.CSSProperties;
 }
 
 export const IconButton: FunctionComponent<Props> = ({
@@ -18,11 +19,11 @@ export const IconButton: FunctionComponent<Props> = ({
   href,
   icon,
   name,
+  style = {},
+  iconSize = 24,
   ...props
 }: Props) => {
   const Icon = icon;
-
-  const style: Record<string, string> = {};
 
   if (appearance === "muted") {
     style.backgroundColor = "transparent";
@@ -35,7 +36,7 @@ export const IconButton: FunctionComponent<Props> = ({
         <button
           name={name}
           type="button"
-          style={{ height: "32px", width: "32px" }}
+          style={{ height: "32px", width: "32px", ...style }}
         >
           <Icon />
         </button>
@@ -49,7 +50,7 @@ export const IconButton: FunctionComponent<Props> = ({
       style={{ height: "32px", width: "32px", ...style }}
       {...props}
     >
-      <Icon />
+      <Icon style={{ width: iconSize, height: iconSize }} />
     </button>
   );
 };

@@ -5,12 +5,12 @@ import {
   SubHeader,
   CenterPane,
   Loading,
-  Search,
   DropdownField,
+  TextField,
 } from "../../common";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { useUsers } from "../../hooks";
+import { useNearby } from "../../hooks";
 
 export const NearbyPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const NearbyPage: FunctionComponent = () => {
   const zip = params.get("zip") || "";
   const effects = params.get("effects") || "";
 
-  const { data, fetch, isLoading } = useUsers();
+  const { data, fetch, isLoading } = useNearby();
 
   const onSubmit = (query: Record<string, string | undefined>) => {
     const base = {
@@ -26,7 +26,6 @@ export const NearbyPage: FunctionComponent = () => {
       zip: zip,
       ...query,
     };
-    console.log(base);
     fetch();
     navigate({
       search: `?${new URLSearchParams(base).toString()}`,
@@ -43,7 +42,7 @@ export const NearbyPage: FunctionComponent = () => {
           <p>Chemical Exposure by Zip Code</p>
         </div>
         <FlexPane>
-          <Search
+          <TextField
             value={zip}
             placeholder="Search by zip"
             style={{ width: "200px", marginRight: "16px" }}
@@ -65,12 +64,9 @@ export const NearbyPage: FunctionComponent = () => {
           </CenterPane>
         )}
 
-        {data.map(({ id, firstName, lastName, avatar }: any) => (
-          <FlexPane key={id}>
-            {avatar && <img src={avatar} alt={firstName} />}
-            <p>
-              {firstName} {lastName}
-            </p>
+        {data.map(({ name }) => (
+          <FlexPane key={name}>
+            <p>{name}</p>
           </FlexPane>
         ))}
       </Page>

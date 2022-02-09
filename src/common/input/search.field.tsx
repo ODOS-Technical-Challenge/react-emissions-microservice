@@ -1,41 +1,51 @@
 import React, { FunctionComponent } from "react";
-import { TextInput } from "@trussworks/react-uswds";
-import { useId, useValue } from "../index";
+import { IconSearch, TextInput } from "@trussworks/react-uswds";
+import { IconButton, useId, useValue } from "../index";
 
 export interface Props {
   value?: string;
   id?: string;
   placeholder?: string;
 
-  style?: React.CSSProperties;
-
-  onBlur: (value: string) => void;
+  onClick: (value: string) => void;
 }
 
 export const Search: FunctionComponent<Props> = ({
   id,
   value = "",
   placeholder,
-  onBlur,
-  style = {},
+  onClick,
 }: Props) => {
   const [internal, setInternal] = useValue(value);
   const [cid] = useId(id);
 
   return (
-    <TextInput
-      placeholder={placeholder}
-      id={cid}
-      style={style}
-      name="search"
-      type="text"
-      value={internal}
-      onChange={({ target }) => setInternal(target.value)}
-      onBlur={({ target }) => {
-        if (target.value !== value) {
-          onBlur(target.value);
-        }
-      }}
-    />
+    <div style={{ display: "flex", alignItems: "flex-end" }}>
+      <TextInput
+        placeholder={placeholder}
+        id={cid}
+        name="search"
+        type="text"
+        value={internal}
+        onChange={({ target }) => setInternal(target.value)}
+        onKeyDown={({ key }) => {
+          if (key === "Enter") {
+            onClick(internal);
+          }
+        }}
+      />
+      <IconButton
+        name="search"
+        style={{
+          height: 40,
+          width: 40,
+          background: "#4AD01A",
+          color: "white",
+          border: "none",
+        }}
+        onClick={() => onClick(internal)}
+        icon={IconSearch}
+      />
+    </div>
   );
 };

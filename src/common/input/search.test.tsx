@@ -3,21 +3,22 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import { Props } from "./search.field";
 import { Search } from "../index";
+import userEvent from "@testing-library/user-event";
 
 describe("Common Component: Search Field", () => {
-  const onBlur = jest.fn();
+  const onClick = jest.fn();
 
   let props: Props = {
     value: "",
-    onBlur,
+    onClick,
   };
 
   beforeEach(() => {
-    onBlur.mockClear();
+    onClick.mockClear();
 
     props = {
       value: "",
-      onBlur,
+      onClick,
     };
   });
 
@@ -28,6 +29,13 @@ describe("Common Component: Search Field", () => {
     expect(input).toBeInTheDocument();
   });
 
+  it("should handle rendering a button.", () => {
+    render(<Search {...props} />);
+    const button = screen.getByRole("button");
+
+    expect(button).toBeInTheDocument();
+  });
+
   it("should handle an default value.", () => {
     props.value = "Hello World";
     render(<Search {...props} />);
@@ -36,30 +44,28 @@ describe("Common Component: Search Field", () => {
     expect(input.value).toEqual(props.value);
   });
 
-  it("should handle an undefined 'value' property.", () => {
-    props.value = undefined;
+  it("should handle the 'on click' action.", () => {
+    const value = "hey";
+
     render(<Search {...props} />);
-    const input: HTMLInputElement = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox");
+    const button = screen.getByRole("button");
 
-    expect(input.value).toEqual("");
+    fireEvent.change(input, { target: { value } });
+    fireEvent.click(button);
+
+    expect(onClick).toHaveBeenLastCalledWith(value);
   });
 
-  it("should handle an defined 'style' property.", () => {
-    props.style = { marginLeft: "10px" };
-    const { container } = render(<Search {...props} />);
-
-    expect(container.innerHTML).toContain("margin-left");
-  });
-
-  it("should handle the 'on blur' action.", () => {
+  it("should handle the 'enter' key.", () => {
     const value = "hey";
 
     render(<Search {...props} />);
     const input = screen.getByRole("textbox");
 
     fireEvent.change(input, { target: { value } });
-    fireEvent.blur(input, { target: { value } });
+    fireEvent.keyDown(input, { key: "Enter" });
 
-    expect(onBlur).toHaveBeenLastCalledWith(value);
+    expect(onClick).toHaveBeenLastCalledWith(value);
   });
 });

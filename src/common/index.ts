@@ -23,6 +23,7 @@ export { Dropdown } from "./dropdown/dropdown.component";
 /** Common Input Components **/
 export { Search } from "./input/search.field";
 export { DropdownField } from "./input/dropdown.field";
+export { TextField } from "./input/text.field";
 
 /** Common Loading Components **/
 export { Loading } from "./loading/loading.component";

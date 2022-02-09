@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { PrimaryNav, Header } from "@trussworks/react-uswds";
 import { ROUTES } from "../../utils";
 
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 interface Props {

@@ -2,14 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import { act } from "react-dom/test-utils";
-import { UserApi } from "../../api";
+import { NearbyApi } from "../../api";
 
 import { NearbyPage } from "./nearby.page";
 
-jest.mock("../../api", () => ({ UserApi: { getAll: jest.fn() } }));
+jest.mock("../../api");
 
-const getAll = UserApi.getAll as jest.MockedFunction<typeof UserApi.getAll>;
+const getAll = NearbyApi.getAll as jest.MockedFunction<typeof NearbyApi.getAll>;
 
 describe("Application Page: Search Page", () => {
   beforeEach(() => {
@@ -46,6 +45,8 @@ describe("Application Page: Search Page", () => {
     );
 
     const search = await screen.findByRole("textbox");
+    const button = await screen.findByRole("button");
     userEvent.type(search, "query");
+    userEvent.click(button);
   });
 });

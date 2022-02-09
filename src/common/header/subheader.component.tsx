@@ -10,11 +10,11 @@ interface Props {
 
 export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
   const menuItems: React.ReactNode[] = [
-    // <>
-    //   <a href={ROUTES.Favorites.path} className="usa-nav__link">
-    //     Favorites
-    //   </a>
-    // </>,
+    <>
+      <a href={ROUTES.Engineer.path} className="usa-nav__link">
+        Engineer
+      </a>
+    </>,
   ];
   return (
     <Header

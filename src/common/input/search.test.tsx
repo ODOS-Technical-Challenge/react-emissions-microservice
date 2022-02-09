@@ -4,20 +4,20 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Props } from "./search.field";
 import { Search } from "../index";
 
-describe("Should render an editable text-area.", () => {
-  const onClick = jest.fn();
+describe("Common Component: Search Field", () => {
+  const onBlur = jest.fn();
 
   let props: Props = {
     value: "",
-    onClick,
+    onBlur,
   };
 
   beforeEach(() => {
-    onClick.mockClear();
+    onBlur.mockClear();
 
     props = {
       value: "",
-      onClick,
+      onBlur,
     };
   });
 
@@ -28,13 +28,6 @@ describe("Should render an editable text-area.", () => {
     expect(input).toBeInTheDocument();
   });
 
-  it("should handle rendering a button.", () => {
-    render(<Search {...props} />);
-    const button = screen.getByRole("button");
-
-    expect(button).toBeInTheDocument();
-  });
-
   it("should handle an default value.", () => {
     props.value = "Hello World";
     render(<Search {...props} />);
@@ -43,16 +36,30 @@ describe("Should render an editable text-area.", () => {
     expect(input.value).toEqual(props.value);
   });
 
-  it("should handle the 'on click' action.", () => {
+  it("should handle an undefined 'value' property.", () => {
+    props.value = undefined;
+    render(<Search {...props} />);
+    const input: HTMLInputElement = screen.getByRole("textbox");
+
+    expect(input.value).toEqual("");
+  });
+
+  it("should handle an defined 'style' property.", () => {
+    props.style = { marginLeft: "10px" };
+    const { container } = render(<Search {...props} />);
+
+    expect(container.innerHTML).toContain("margin-left");
+  });
+
+  it("should handle the 'on blur' action.", () => {
     const value = "hey";
 
     render(<Search {...props} />);
     const input = screen.getByRole("textbox");
-    const button = screen.getByRole("button");
 
     fireEvent.change(input, { target: { value } });
-    fireEvent.click(button);
+    fireEvent.blur(input, { target: { value } });
 
-    expect(onClick).toHaveBeenLastCalledWith(value);
+    expect(onBlur).toHaveBeenLastCalledWith(value);
   });
 });

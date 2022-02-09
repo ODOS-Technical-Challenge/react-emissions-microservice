@@ -1,41 +1,41 @@
 import React, { FunctionComponent } from "react";
-import { Button, TextInput } from "@trussworks/react-uswds";
+import { TextInput } from "@trussworks/react-uswds";
 import { useId, useValue } from "../index";
 
 export interface Props {
-  value: string;
+  value?: string;
   id?: string;
   placeholder?: string;
 
-  onClick: (value: string) => void;
+  style?: React.CSSProperties;
+
+  onBlur: (value: string) => void;
 }
 
 export const Search: FunctionComponent<Props> = ({
   id,
-  value,
+  value = "",
   placeholder,
-  onClick,
+  onBlur,
+  style = {},
 }: Props) => {
   const [internal, setInternal] = useValue(value);
   const [cid] = useId(id);
 
   return (
-    <div style={{ display: "flex", alignItems: "flex-end" }}>
-      <TextInput
-        placeholder={placeholder}
-        id={cid}
-        name="search"
-        type="text"
-        value={internal}
-        onChange={({ target }) => setInternal(target.value)}
-      />
-      <Button
-        style={{ height: "40px", marginLeft: "4px" }}
-        type="button"
-        onClick={() => onClick(internal)}
-      >
-        Submit
-      </Button>
-    </div>
+    <TextInput
+      placeholder={placeholder}
+      id={cid}
+      style={style}
+      name="search"
+      type="text"
+      value={internal}
+      onChange={({ target }) => setInternal(target.value)}
+      onBlur={({ target }) => {
+        if (target.value !== value) {
+          onBlur(target.value);
+        }
+      }}
+    />
   );
 };

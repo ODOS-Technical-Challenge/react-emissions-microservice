@@ -6,8 +6,7 @@ import { ROUTES } from "../utils";
 
 import "./App.css";
 
-import { HomePage } from "../components";
-import { ExposurePage } from "../components/exposure/exposure.page";
+import { ExposurePage, HomePage, NearbyPage } from "../components";
 
 export const App: FunctionComponent = () => {
   return (
@@ -16,6 +15,7 @@ export const App: FunctionComponent = () => {
         <Header />
         <Routes>
           <Route {...ROUTES.Home} element={<HomePage />} />
+          <Route {...ROUTES.Nearby} element={<NearbyPage />} />
           <Route {...ROUTES.Engineer} element={<ExposurePage />} />
 
           {/** Fallback Redirect / Default Page */}

@@ -1,13 +1,15 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { UserApi } from "../../api";
+import { ExposureApi } from "../../api";
 
-import { HomePage } from "./home.page";
+import { EngineerPage } from "./engineer.page";
 
-jest.mock("../../api", () => ({ UserApi: { getAll: jest.fn() } }));
+jest.mock("../../api", () => ({ ExposureApi: { getAll: jest.fn() } }));
 
-const getAll = UserApi.getAll as jest.MockedFunction<typeof UserApi.getAll>;
+const getAll = ExposureApi.getAll as jest.MockedFunction<
+  typeof ExposureApi.getAll
+>;
 
 describe("Application Page: Search Page", () => {
   beforeEach(() => {
@@ -17,11 +19,11 @@ describe("Application Page: Search Page", () => {
   it("should handle rendering the component.", async () => {
     render(
       <BrowserRouter>
-        <HomePage />
+        <EngineerPage />
       </BrowserRouter>
     );
 
-    const search = await screen.findByText("Welcome to Demo App");
+    const search = await screen.findByText("Exposure Type");
     expect(search).toBeInTheDocument();
   });
 });

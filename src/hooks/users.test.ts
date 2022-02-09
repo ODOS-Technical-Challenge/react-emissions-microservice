@@ -21,13 +21,6 @@ describe("Hook: Use Users", () => {
     ).mockReturnValue([new URLSearchParams(""), jest.fn()]);
   });
 
-  it("should handle being called.", () => {
-    const { result } = renderHook(() => useUsers());
-
-    expect(result.current.isLoading).toBeTruthy();
-    expect(result.current.data).toEqual([]);
-  });
-
   it("should handle resolving REST call.", () => {
     getAll.mockResolvedValue({ data: [], status: 200 });
     const { result } = renderHook(() => useUsers());

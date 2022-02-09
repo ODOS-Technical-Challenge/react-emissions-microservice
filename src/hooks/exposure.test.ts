@@ -23,13 +23,6 @@ describe("Hook: Use Exposure", () => {
   });
 
   it("should handle being called.", () => {
-    const { result } = renderHook(() => useExposure());
-
-    expect(result.current.isLoading).toBeTruthy();
-    expect(result.current.data).toEqual([]);
-  });
-
-  it("should handle resolving REST call.", () => {
     getAll.mockResolvedValue({ data: [], status: 200 });
     const { result } = renderHook(() => useExposure());
 

@@ -5,12 +5,12 @@ import {
   SubHeader,
   CenterPane,
   Loading,
-  DropdownField,
   TextField,
 } from "../../common";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
 import { useNearby } from "../../hooks";
+
+import { Chemical } from "./chemical.component";
 
 export const NearbyPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -35,28 +35,37 @@ export const NearbyPage: FunctionComponent = () => {
   return (
     <Fragment>
       <SubHeader />
+      <CenterPane style={{ alignItems: "center", backgroundColor: "#255EA2" }}>
+        <h4 style={{ marginRight: "16px", color: "white" }}>
+          Enter your zip code to see potential hazards in your area
+        </h4>
+        <TextField
+          style={{ width: 150 }}
+          value={zip}
+          placeholder="zip code"
+          onBlur={(value) => onSubmit({ zip: value })}
+        />
+      </CenterPane>
 
+      <FlexPane
+        style={{
+          justifyContent: "flex-end",
+          width: "50vw",
+          margin: "8px auto",
+        }}
+      >
+        <p style={{ marginRight: 8 }}>Filter by health effects</p>
+        <TextField
+          value={effects}
+          placeholder="Health effect"
+          style={{ width: "200px", marginRight: "16px" }}
+          onBlur={(value) => onSubmit({ zip: value })}
+        />
+      </FlexPane>
       <Page>
         <div>
           <h3>Chemical Exposure by Zip Code</h3>
-          <p>Chemical Exposure by Zip Code</p>
         </div>
-        <FlexPane>
-          <TextField
-            value={zip}
-            placeholder="Search by zip"
-            style={{ width: "200px", marginRight: "16px" }}
-            onBlur={(value) => onSubmit({ zip: value })}
-          />
-          <DropdownField
-            value={effects}
-            options={["All"]}
-            style={{ width: "200px", marginRight: "16px" }}
-            onChange={(value) => {
-              onSubmit({ effects: value });
-            }}
-          />
-        </FlexPane>
 
         {isLoading && (
           <CenterPane>
@@ -64,9 +73,26 @@ export const NearbyPage: FunctionComponent = () => {
           </CenterPane>
         )}
 
-        {data.map(({ name }) => (
-          <FlexPane key={name}>
-            <p>{name}</p>
+        {data.map(({ county, chemicals, name, state }) => (
+          <FlexPane
+            key={name}
+            style={{
+              borderBottom: "1px solid rgb(21,22,21)",
+              padding: 8,
+              margin: 16,
+            }}
+          >
+            <div style={{ marginRight: 32, width: 300 }}>
+              <p>{name}</p>
+              <p>
+                {county}, {state}
+              </p>
+            </div>
+            <div>
+              {chemicals.map((chemical) => (
+                <Chemical key={`${name}-${chemical.name}`} data={chemical} />
+              ))}
+            </div>
           </FlexPane>
         ))}
       </Page>

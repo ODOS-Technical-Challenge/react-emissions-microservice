@@ -8,5 +8,6 @@ export const ROUTES: Record<string, RouteType> = {
   Home: { path: "/home" },
   Nearby: { path: "/nearby" },
   Favorites: { path: "/favorites" },
+  Engineer: { path: "/engineer" },
   View: { path: "/view/:id" },
 };

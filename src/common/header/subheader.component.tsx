@@ -16,6 +16,11 @@ export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
         Nearby
       </Link>
     </>,
+    <>
+      <Link to={ROUTES.Engineer.path} className="usa-nav__link">
+        Engineer
+      </Link>
+    </>,
   ];
   return (
     <Header

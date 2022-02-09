@@ -7,13 +7,11 @@ import {
   CardFooter,
   CardGroup,
   CardHeader,
-  Dropdown,
-  Label,
   Search,
 } from "@trussworks/react-uswds";
 import { useExposure } from "../../hooks/exposure.hook";
 
-export const ExposurePage: FunctionComponent = () => {
+export const ResearcherPage: FunctionComponent = () => {
   const navigate = useNavigate();
   const { data, fetch, isLoading } = useExposure();
 
@@ -30,27 +28,14 @@ export const ExposurePage: FunctionComponent = () => {
 
       <Page>
         <div>
-          <h3>Method of Exposure</h3>
-          <p>Search by zip, filter by exposure.</p>
+          <h3>Search by Chemicals</h3>
         </div>
         <div>
           <Search
-            placeholder="Search by zip"
+            placeholder="Search by chemical"
             size="small"
             onSubmit={onSubmit}
           />
-          <Label htmlFor="options">Exposure Type</Label>
-          <Dropdown
-            id="input-dropdown"
-            name="input-dropdown"
-            style={{ width: "100%" }}
-          >
-            <option>- Select - </option>
-            <option value="value1">Air</option>
-            <option value="value2">Underground</option>
-            <option value="value3">Land</option>
-            <option value="value4">Water</option>
-          </Dropdown>
         </div>
 
         {isLoading && (

@@ -6,7 +6,7 @@ import { ROUTES } from "../utils";
 
 import "./App.css";
 
-import { HomePage } from "../components";
+import { HomePage, NearbyPage } from "../components";
 
 export const App: FunctionComponent = () => {
   return (
@@ -15,6 +15,7 @@ export const App: FunctionComponent = () => {
         <Header />
         <Routes>
           <Route {...ROUTES.Home} element={<HomePage />} />
+          <Route {...ROUTES.Nearby} element={<NearbyPage />} />
 
           {/** Fallback Redirect / Default Page */}
           <Route path="" element={<Navigate to={ROUTES.Home.path} />} />

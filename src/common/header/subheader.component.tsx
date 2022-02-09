@@ -3,6 +3,7 @@ import { PrimaryNav, Header } from "@trussworks/react-uswds";
 import { ROUTES } from "../../utils";
 
 import logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 interface Props {
   children?: ReactNode;
@@ -10,11 +11,11 @@ interface Props {
 
 export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
   const menuItems: React.ReactNode[] = [
-    // <>
-    //   <a href={ROUTES.Favorites.path} className="usa-nav__link">
-    //     Favorites
-    //   </a>
-    // </>,
+    <>
+      <Link to={ROUTES.Nearby.path} className="usa-nav__link">
+        Nearby
+      </Link>
+    </>,
   ];
   return (
     <Header
@@ -26,9 +27,9 @@ export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
     >
       <div className="usa-nav-container">
         <div className="usa-navbar">
-          <a href={ROUTES.Home.path}>
+          <Link to={ROUTES.Home.path}>
             <img height={32} src={logo} alt="logo" style={{ margin: "16px" }} />
-          </a>
+          </Link>
           <PrimaryNav items={menuItems}></PrimaryNav>
         </div>
         {children}

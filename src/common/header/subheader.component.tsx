@@ -12,13 +12,23 @@ interface Props {
 export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
   const menuItems: React.ReactNode[] = [
     <>
-      <Link to={ROUTES.Nearby.path} className="usa-nav__link">
-        Nearby
+      <Link to={ROUTES.Home.path} className="usa-nav__link">
+        Home
       </Link>
     </>,
     <>
       <Link to={ROUTES.Engineer.path} className="usa-nav__link">
         Engineer
+      </Link>
+    </>,
+    <>
+      <Link to={ROUTES.Nearby.path} className="usa-nav__link">
+        Nearby
+      </Link>
+    </>,
+    <>
+      <Link to={ROUTES.Researcher.path} className="usa-nav__link">
+        Researcher
       </Link>
     </>,
   ];

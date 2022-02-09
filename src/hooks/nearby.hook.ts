@@ -2,13 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { NearbyApi } from "../api";
+import { FacilityType } from "../types";
 
 /**
  * Fetch All Nearby React Hook
  * @returns
  */
 export const useNearby = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<FacilityType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
   const [params] = useSearchParams();

@@ -1,5 +1,7 @@
+import { FacilityType } from "../types";
+
 async function getAll(params: URLSearchParams) {
-  const data = [
+  const data: FacilityType[] = [
     {
       name: "FAIRBANKS SCALES INC",
       street: "2176 PORTLAND ST",
@@ -13,6 +15,10 @@ async function getAll(params: URLSearchParams) {
         {
           name: "Manganese",
           healthEffects: "death",
+        },
+        {
+          name: "Water",
+          healthEffects: "life",
         },
       ],
     },
@@ -44,6 +50,14 @@ async function getAll(params: URLSearchParams) {
       chemicals: [
         {
           name: "Lead",
+          healthEffects: "death",
+        },
+        {
+          name: "Nickel",
+          healthEffects: "death",
+        },
+        {
+          name: "Manganese",
           healthEffects: "death",
         },
       ],
@@ -78,6 +92,10 @@ async function getAll(params: URLSearchParams) {
           name: "Manganese",
           healthEffects: "death",
         },
+        {
+          name: "Nickel",
+          healthEffects: "death",
+        },
       ],
     },
     {
@@ -92,6 +110,14 @@ async function getAll(params: URLSearchParams) {
       chemicals: [
         {
           name: "Certain glycol ethers",
+          healthEffects: "death",
+        },
+        {
+          name: "Molybdenum trioxide",
+          healthEffects: "death",
+        },
+        {
+          name: "Benzene",
           healthEffects: "death",
         },
       ],
@@ -140,6 +166,10 @@ async function getAll(params: URLSearchParams) {
       chemicals: [
         {
           name: "Manganese",
+          healthEffects: "death",
+        },
+        {
+          name: "Benzene",
           healthEffects: "death",
         },
       ],

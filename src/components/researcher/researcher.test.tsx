@@ -23,7 +23,7 @@ describe("Application Page: Search Page", () => {
       </BrowserRouter>
     );
 
-    const search = await screen.findByText("Exposure Type");
+    const search = await screen.findByText("Search by Chemicals");
     expect(search).toBeInTheDocument();
   });
 });

@@ -5,10 +5,12 @@ import { Header } from "../common";
 import { ROUTES } from "../utils";
 
 import "./App.css";
-
-import { HomePage } from "../components";
-import { EngineerPage } from "../components/engineer/engineer.page";
-import { ResearcherPage } from "../components/researcher/researcher.page";
+import {
+  EngineerPage,
+  HomePage,
+  NearbyPage,
+  ResearcherPage,
+} from "../components";
 
 export const App: FunctionComponent = () => {
   return (
@@ -19,6 +21,8 @@ export const App: FunctionComponent = () => {
           <Route {...ROUTES.Home} element={<HomePage />} />
           <Route {...ROUTES.Engineer} element={<EngineerPage />} />
           <Route {...ROUTES.Researcher} element={<ResearcherPage />} />
+          <Route {...ROUTES.Nearby} element={<NearbyPage />} />
+          <Route {...ROUTES.Engineer} element={<EngineerPage />} />
 
           {/** Fallback Redirect / Default Page */}
           <Route path="" element={<Navigate to={ROUTES.Home.path} />} />

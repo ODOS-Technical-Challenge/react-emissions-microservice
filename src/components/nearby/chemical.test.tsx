@@ -8,8 +8,7 @@ describe("Nearby Component: Chemical", () => {
   it("should handle rendering component.", async () => {
     const data: ChemicalType = {
       name: "Iron",
-      healthEffects: "none",
-    };
+    } as ChemicalType;
 
     render(<Chemical data={data} />);
 
@@ -20,11 +19,32 @@ describe("Nearby Component: Chemical", () => {
   it("should handle rendering dangerous chemical.", async () => {
     const data: ChemicalType = {
       name: "Iron",
-      healthEffects: "death",
-    };
+      carcinogenInd: true,
+    } as ChemicalType;
 
     const { container } = render(<Chemical data={data} />);
 
-    expect(container.innerHTML).toContain("red");
+    expect(container.innerHTML).toContain("rgb(125, 40, 40)");
+  });
+
+  it("should handle rendering warning chemical.", async () => {
+    const data: ChemicalType = {
+      name: "Iron",
+      pfasInd: true,
+    } as ChemicalType;
+
+    const { container } = render(<Chemical data={data} />);
+
+    expect(container.innerHTML).toContain("rgb(255, 176, 32)");
+  });
+
+  it("should handle rendering okay chemical.", async () => {
+    const data: ChemicalType = {
+      name: "Iron",
+    } as ChemicalType;
+
+    const { container } = render(<Chemical data={data} />);
+
+    expect(container.innerHTML).toContain("rgb(20, 41, 102)");
   });
 });

@@ -25,6 +25,7 @@ export const Chemical: FunctionComponent<Props> = ({ data }: Props) => {
       )}
       <p style={{ width: 200, ...style }}>{data.name}</p>
       <p style={style}>{data.healthEffects}</p>
+      {data.exposure && <p style={style}>{data.exposure}</p>}
     </FlexPane>
   );
 };

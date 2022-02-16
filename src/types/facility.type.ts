@@ -14,4 +14,5 @@ export interface FacilityType {
 export interface ChemicalType {
   name: string;
   healthEffects: string;
+  exposure?: string;
 }

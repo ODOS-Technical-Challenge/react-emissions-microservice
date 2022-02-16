@@ -18,7 +18,16 @@ export const useExposure = () => {
     const result = await ExposureApi.getAll(params);
     console.log(result.data);
     // setData(result.data);
-    setData([{ name: "testing", exposure: "test" }]);
+    setData([
+      {
+        name: "testing",
+        county: "county",
+        state: "state",
+        chemicals: [
+          { name: "chemical", healthEffects: "death", exposure: "air" },
+        ],
+      },
+    ]);
     setLoading(false);
   }, []);
 

@@ -2,17 +2,9 @@ import React, { Fragment, FunctionComponent } from "react";
 import GoogleMapReact from "google-map-react";
 import { Page, SubHeader, CenterPane, Loading } from "../../common";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardGroup,
-  CardHeader,
-  Dropdown,
-  Label,
-  Search,
-} from "@trussworks/react-uswds";
+import { Dropdown, Label, Search } from "@trussworks/react-uswds";
 import { useExposure } from "../../hooks/exposure.hook";
+import { Facility } from "../nearby/facility.component";
 
 export const EngineerPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -103,15 +95,11 @@ export const EngineerPage: FunctionComponent = () => {
             <Loading />
           </CenterPane>
         )}
-        <CardGroup style={{ marginTop: "20px" }}>
-          {data.map(({ name, exposure }: any) => (
-            <Card key={name} gridLayout={{ tablet: { col: 12 } }}>
-              <CardHeader>{name}</CardHeader>
-              <CardBody>{exposure}</CardBody>
-              <CardFooter>chemicals</CardFooter>
-            </Card>
+        <div style={{ marginTop: "20px" }}>
+          {data.map((facility: any) => (
+            <Facility key={facility.name} data={facility} />
           ))}
-        </CardGroup>
+        </div>
       </Page>
     </Fragment>
   );

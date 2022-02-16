@@ -19,7 +19,7 @@ export const Counties: FunctionComponent = () => {
           justifyContent: "space-evenly",
         }}
       >
-        {data.map(({ county = "Empty", state = "No Where" }) => (
+        {data.map(({ county = "Empty", state = "No Where", img }) => (
           <div
             key={county}
             style={{
@@ -28,16 +28,30 @@ export const Counties: FunctionComponent = () => {
               boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
             }}
           >
-            <CenterPane
-              style={{
-                borderTopLeftRadius: "10px",
-                borderTopRightRadius: "10px",
-                height: "75px",
-                backgroundColor: "#00000029",
-              }}
-            >
-              <IconPark style={{ color: "#B9B5B5", width: 48, height: 48 }} />
-            </CenterPane>
+            {img ? (
+              <img
+                src={img}
+                alt={county}
+                height="75px"
+                style={{
+                  width: "100%",
+                  objectFit: "cover",
+                  borderTopLeftRadius: "10px",
+                  borderTopRightRadius: "10px",
+                }}
+              />
+            ) : (
+              <CenterPane
+                style={{
+                  borderTopLeftRadius: "10px",
+                  borderTopRightRadius: "10px",
+                  height: "75px",
+                  backgroundColor: "#00000029",
+                }}
+              >
+                <IconPark style={{ color: "#B9B5B5", width: 48, height: 48 }} />
+              </CenterPane>
+            )}
             <div
               style={{
                 padding: 8,

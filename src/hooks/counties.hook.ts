@@ -8,21 +8,15 @@ import { CountyApi } from "../api";
  * @returns
  */
 export const useCounties = () => {
-  const [data, setData] = useState<CountyType[]>([
-    {},
-    {},
-    {},
-    {},
-    {},
-  ] as CountyType[]);
+  const [data, setData] = useState<CountyType[]>([] as CountyType[]);
   const [isLoading, setLoading] = useState(false);
 
   const fetch = useCallback(async () => {
     setLoading(true);
     const result = await CountyApi.getAll();
-    if (result.data.length) {
-      setData(result.data);
-    }
+    // if (result.data.length) {
+    setData(result.data);
+    // }
     setLoading(false);
   }, []);
 

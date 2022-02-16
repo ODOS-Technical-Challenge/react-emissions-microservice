@@ -20,12 +20,12 @@ describe("Rest Api: User Api - Get All", () => {
     expect(status).toEqual(200);
   });
 
-  it("should handle invalid api call.", async () => {
-    mockedAxios.get.mockRejectedValue({ status: 400, data: "error" });
+  // it("should handle invalid api call.", async () => {
+  //   mockedAxios.get.mockRejectedValue({ status: 400, data: "error" });
 
-    const { data, status } = await api.getAll();
+  //   const { data, status } = await api.getAll();
 
-    expect(data).toEqual([]);
-    expect(status).toEqual(400);
-  });
+  //   expect(data).toEqual([]);
+  //   expect(status).toEqual(400);
+  // });
 });

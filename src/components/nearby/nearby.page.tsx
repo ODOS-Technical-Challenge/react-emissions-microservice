@@ -10,7 +10,7 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useNearby } from "../../hooks";
 
-import { Chemical } from "./chemical.component";
+import { Facility } from "./facility.component";
 
 export const NearbyPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -22,11 +22,11 @@ export const NearbyPage: FunctionComponent = () => {
 
   const onSubmit = (query: Record<string, string | undefined>) => {
     const base = {
-      effects: effects,
-      zip: zip,
+      effects,
+      zip,
       ...query,
     };
-    fetch();
+    // fetch();
     navigate({
       search: `?${new URLSearchParams(base).toString()}`,
     });
@@ -59,7 +59,7 @@ export const NearbyPage: FunctionComponent = () => {
           value={effects}
           placeholder="Health effect"
           style={{ width: "200px", marginRight: "16px" }}
-          onBlur={(value) => onSubmit({ zip: value })}
+          onBlur={(value) => onSubmit({ effects: value })}
         />
       </FlexPane>
       <Page>
@@ -73,27 +73,8 @@ export const NearbyPage: FunctionComponent = () => {
           </CenterPane>
         )}
 
-        {data.map(({ county, chemicals, name, state }) => (
-          <FlexPane
-            key={name}
-            style={{
-              borderBottom: "1px solid rgb(21,22,21)",
-              padding: 8,
-              margin: 16,
-            }}
-          >
-            <div style={{ marginRight: 32, width: 300 }}>
-              <p>{name}</p>
-              <p>
-                {county}, {state}
-              </p>
-            </div>
-            <div>
-              {chemicals.map((chemical) => (
-                <Chemical key={`${name}-${chemical.name}`} data={chemical} />
-              ))}
-            </div>
-          </FlexPane>
+        {data.map((facility) => (
+          <Facility key={facility.name} data={facility} query={effects} />
         ))}
       </Page>
     </Fragment>

@@ -13,9 +13,9 @@ export const useNearby = () => {
 
   const [params] = useSearchParams();
 
-  const fetch = useCallback(async () => {
+  const fetch = useCallback(async (overload?: URLSearchParams) => {
     setLoading(true);
-    const result = await NearbyApi.getAll(params);
+    const result = await NearbyApi.getAll(overload || params);
     setData(result.data);
     setLoading(false);
   }, []);

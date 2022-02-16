@@ -26,10 +26,11 @@ export const NearbyPage: FunctionComponent = () => {
       zip,
       ...query,
     };
-    // fetch();
+    const overload = new URLSearchParams(base);
     navigate({
-      search: `?${new URLSearchParams(base).toString()}`,
+      search: `?${overload.toString()}`,
     });
+    fetch(overload);
   };
 
   return (
@@ -40,7 +41,7 @@ export const NearbyPage: FunctionComponent = () => {
           Enter your zip code to see potential hazards in your area
         </h4>
         <TextField
-          style={{ width: 150 }}
+          style={{ width: 150, marginTop: "unset" }}
           value={zip}
           placeholder="zip code"
           onBlur={(value) => onSubmit({ zip: value })}

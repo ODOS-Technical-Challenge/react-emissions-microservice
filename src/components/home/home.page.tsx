@@ -19,7 +19,11 @@ export const HomePage: FunctionComponent = () => {
         <h4 style={{ marginRight: "16px", color: "white" }}>
           Enter your zip code to see potential hazards in your area
         </h4>
-        <Search placeholder="zip code" onClick={onSubmit} />
+        <Search
+          placeholder="zip code"
+          onClick={onSubmit}
+          style={{ marginTop: "unset" }}
+        />
       </CenterPane>
 
       <Page>

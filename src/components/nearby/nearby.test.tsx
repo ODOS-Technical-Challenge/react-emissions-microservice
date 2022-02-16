@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { NearbyApi } from "../../api";
 
 import { NearbyPage } from "./nearby.page";
+import { ChemicalType } from "../../types";
 
 jest.mock("../../api");
 
@@ -38,14 +39,13 @@ describe("Application Page: Search Page", () => {
           state: "VA",
           city: "",
           street: "",
-          zipCode: 20121,
+          zipCode: "20121",
           latitude: 1,
           longitude: 1,
           chemicals: [
             {
               name: "Iron",
-              healthEffects: "none",
-            },
+            } as ChemicalType,
           ],
         },
       ],

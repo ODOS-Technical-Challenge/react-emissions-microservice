@@ -18,7 +18,7 @@ describe("Hook: Use Counties", () => {
     const { result } = renderHook(() => useCounties());
 
     expect(result.current.isLoading).toBeTruthy();
-    expect(result.current.data).toEqual([{}, {}, {}, {}, {}]);
+    expect(result.current.data).toEqual([]);
   });
 
   // it("should handle resolving REST call.", () => {
@@ -37,6 +37,7 @@ describe("Hook: Use Counties", () => {
     const user: CountyType = {
       state: "VA",
       county: "Frederick",
+      img: "",
     };
 
     getAll.mockResolvedValue({ data: [user], status: 200 });

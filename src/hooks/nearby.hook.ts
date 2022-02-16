@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-import { NearbyApi } from "../api";
 import { FacilityType } from "../types";
+import { NearbyApi } from "../api";
 
 /**
  * Fetch All Nearby React Hook

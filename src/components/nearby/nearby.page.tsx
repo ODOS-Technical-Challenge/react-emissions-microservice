@@ -82,8 +82,9 @@ export const NearbyPage: FunctionComponent = () => {
         >
           <strong style={{ marginRight: 32, width: 300 }}>Facility Name</strong>
           <FlexPane style={{ alignItems: "center" }}>
-            <strong style={{ width: 120 }}>Chemical</strong>
-            <strong style={{ width: 120 }}>Health Effect</strong>
+            <strong style={{ width: 144 }}>Chemical</strong>
+            <strong style={{ width: 120 }}>Classification</strong>
+            <strong style={{ width: 240 }}>Health Effect</strong>
           </FlexPane>
         </FlexPane>
         {data.map((facility) => (

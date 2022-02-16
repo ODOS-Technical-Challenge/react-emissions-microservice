@@ -4,7 +4,7 @@ export interface FacilityType {
   city: string;
   state: string;
   street: string;
-  zipCode: number;
+  zipCode: string;
   latitude: number;
   longitude: number;
 
@@ -13,6 +13,12 @@ export interface FacilityType {
 
 export interface ChemicalType {
   name: string;
-  healthEffects: string;
-  exposure?: string;
+  mixtureName: string;
+  elementalMetalIncluded: boolean;
+  classification: string;
+  unitOfMeasure: string;
+  cleanAirInd: boolean;
+  carcinogenInd: boolean;
+  pfasInd: boolean;
+  metalInd: boolean;
 }

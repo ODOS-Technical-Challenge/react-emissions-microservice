@@ -8,26 +8,31 @@ interface Props {
 }
 
 export const Chemical: FunctionComponent<Props> = ({ data }: Props) => {
-  const isDeadly = data.healthEffects.includes("death");
-
   const style: React.CSSProperties = {};
 
-  if (isDeadly) {
-    style.color = "red";
+  if (data.carcinogenInd) {
+    style.color = "#7D2828";
+  } else if (data.pfasInd || data.metalInd) {
+    style.color = "#FFB020";
+  } else {
+    style.color = "#142966";
   }
 
   return (
     <FlexPane style={{ alignItems: "center" }}>
-      {isDeadly ? (
+      {data.carcinogenInd ? (
         <IconReport style={{ marginRight: 8, ...style }} />
       ) : (
         <div style={{ width: 24 }} />
       )}
       <p style={{ width: "120px", ...style }}>{data.name}</p>
-      <p style={{ width: "120px", ...style }}>{data.healthEffects}</p>
-      {data.exposure && (
-        <p style={{ width: "120px", ...style }}>{data.exposure}</p>
-      )}
+      <p style={{ width: "120px", ...style }}>{data.classification}</p>
+
+      <p style={{ width: "240px", ...style }}>
+        {data.carcinogenInd && " Known to cause cancer."}
+        {data.pfasInd && " Known to cause adverse health impacts."}
+        {data.metalInd && " Potentially toxic in large doses."}
+      </p>
     </FlexPane>
   );
 };

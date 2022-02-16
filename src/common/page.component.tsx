@@ -13,7 +13,7 @@ export const Page: FunctionComponent<Props> = ({
   return (
     <div
       style={{
-        width: "50vw",
+        width: "75vw",
         margin: "20px auto",
         padding: "15px",
         background: "white",

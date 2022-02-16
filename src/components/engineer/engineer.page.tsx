@@ -1,6 +1,6 @@
 import React, { Fragment, FunctionComponent } from "react";
 import GoogleMapReact from "google-map-react";
-import { Page, SubHeader, CenterPane, Loading } from "../../common";
+import { Page, SubHeader, CenterPane, Loading, FlexPane } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { Dropdown, Label, Search } from "@trussworks/react-uswds";
 import { useExposure } from "../../hooks/exposure.hook";
@@ -95,7 +95,22 @@ export const EngineerPage: FunctionComponent = () => {
             <Loading />
           </CenterPane>
         )}
-        <div style={{ marginTop: "20px" }}>
+        <FlexPane
+          style={{
+            padding: 8,
+            margin: 16,
+            borderBottom: "1px solid rgb(21,22,21)",
+          }}
+        >
+          <strong style={{ marginRight: 32, width: 300 }}>Facility Name</strong>
+          <FlexPane style={{ alignItems: "center" }}>
+            <strong style={{ width: 120 }}>Chemical</strong>
+            <strong style={{ width: 120 }}>Health Effect</strong>
+            <strong style={{ width: 120 }}>Exposure</strong>
+          </FlexPane>
+        </FlexPane>
+
+        <div>
           {data.map((facility: any) => (
             <Facility key={facility.name} data={facility} />
           ))}

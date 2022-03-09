@@ -28,6 +28,9 @@ export const EngineerPage: FunctionComponent = () => {
   });
 
   const setLocation = (zip: string) => {
+    if (!geoCoder) {
+      return;
+    }
     const g = new geoCoder.maps.Geocoder();
     g.geocode({ address: "US zipcode " + zip }, async (results: any) => {
       const lat = results[0].geometry.location.lat();

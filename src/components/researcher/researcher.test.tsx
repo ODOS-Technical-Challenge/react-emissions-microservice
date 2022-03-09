@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ExposureApi } from "../../api";
 
 import { ResearcherPage } from "./researcher.page";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../api", () => ({ ExposureApi: { getAll: jest.fn() } }));
 
@@ -25,5 +26,17 @@ describe("Application Page: Search Page", () => {
 
     const search = await screen.findByText("Search by Chemicals");
     expect(search).toBeInTheDocument();
+  });
+
+  it("calls submit", async () => {
+    const screen = render(
+      <BrowserRouter>
+        <ResearcherPage />
+      </BrowserRouter>
+    );
+    const input = screen.getByPlaceholderText("Search by chemical");
+    userEvent.type(input, "22031");
+    userEvent.tab();
+    expect(input).toBeInTheDocument();
   });
 });

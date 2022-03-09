@@ -13,21 +13,11 @@ export const useExposure = () => {
 
   const [params] = useSearchParams();
 
-  const fetch = useCallback(async () => {
+  const fetch = useCallback(async (value?: string) => {
     setLoading(true);
-    const result = await ExposureApi.getAll(params);
-    console.log(result.data);
-    // setData(result.data);
-    setData([
-      {
-        name: "testing",
-        county: "county",
-        state: "state",
-        chemicals: [
-          { name: "chemical", healthEffects: "death", exposure: "air" },
-        ],
-      },
-    ]);
+    const zip = value || params.get("zip") || "";
+    const result = await ExposureApi.getAll(zip);
+    setData(result.data);
     setLoading(false);
   }, []);
 

@@ -13,6 +13,7 @@ import { Dropdown, Label } from "@trussworks/react-uswds";
 import { useExposure } from "../../hooks/exposure.hook";
 import { Facility } from "../nearby/facility.component";
 import axios from "axios";
+import client from "@google/maps";
 
 export const EngineerPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -20,26 +21,27 @@ export const EngineerPage: FunctionComponent = () => {
   const { data, fetch, isLoading } = useExposure();
   const zip = params.get("zip") || "";
   const [air, setAir] = useState<string>("");
-  const [geoCoder, setGeoCoder]: any = useState<any>(null);
+  // const [geoCoder, setGeoCoder]: any = useState<any>(null);
+  const google = client.createClient({
+    key: "AIzaSyAz1o5MKx77vb9lDRDB1Iw566ZiwOHFiQ4",
+  });
 
   const [center, setCenter] = useState({
     lat: 44.42767,
     lng: -71.97842,
   });
 
-  const setLocation = (zip: string) => {
-    if (!geoCoder) {
-      return;
-    }
-    const g = new geoCoder.maps.Geocoder();
-    g.geocode({ address: "US zipcode " + zip }, async (results: any) => {
-      const lat = results[0].geometry.location.lat();
-      const lng = results[0].geometry.location.lng();
+  const setLocation = async (zip: string) => {
+    google.geocode({ address: "US zipcode " + zip }, async (r, response) => {
+      const results = response.json.results;
+      const lat = results[0].geometry.location.lat;
+      const lng = results[0].geometry.location.lng;
       const date = new Date().toJSON().split("T")[0];
-      const { data } = await axios.get(
+      const airq = await axios.get(
         `https://www.airnowapi.org/aq/forecast/zipCode/?format=application/json&zipCode=${zip}&date=${date}&distance=50&API_KEY=8B47C42B-FCF9-4DA3-80DC-4FFA1C0E8664`
       );
-      if (data.length) {
+      const data = airq.data;
+      if (data) {
         setAir(`${data[0].AQI} ${data[0].Category.Name}`);
       } else {
         setAir("NA");
@@ -59,16 +61,11 @@ export const EngineerPage: FunctionComponent = () => {
   const K_WIDTH = 40;
   const K_HEIGHT = 40;
 
-  const initGeocoder = (google: any) => {
-    setGeoCoder(google);
-  };
-
   useEffect(() => {
-    if (geoCoder && zip) {
+    if (zip) {
       setTimeout(() => setLocation(zip), 1000);
-      console.log("geo ready");
     }
-  }, [geoCoder]);
+  }, []);
 
   const onChange = (args: any) => {
     const { center: newCenter } = args;
@@ -137,7 +134,6 @@ export const EngineerPage: FunctionComponent = () => {
             zoom={8}
             yesIWantToUseGoogleMapApiInternals={true}
             onChange={onChange}
-            onGoogleApiLoaded={initGeocoder}
           >
             {data.map((facility: any, index: number) => (
               <MarkerComponent

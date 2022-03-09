@@ -4,7 +4,6 @@ import { render } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import { ExposureApi } from "../../api";
-
 import { EngineerPage } from "./engineer.page";
 
 jest.mock("../../api", () => ({ ExposureApi: { getAll: jest.fn() } }));
@@ -17,7 +16,7 @@ const sleep = (ms: number): any => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-describe("Application Page: Search Page", () => {
+describe("Application Page: Engineer Page", () => {
   beforeEach(() => {
     getAll.mockResolvedValue({ data: [], status: 200 });
   });
@@ -50,7 +49,7 @@ describe("Application Page: Search Page", () => {
         <EngineerPage />
       </BrowserRouter>
     );
-    await act(() => sleep(1500));
+    await act(() => sleep(2500));
     const input = screen.getByPlaceholderText("Search by zip");
     userEvent.type(input, "22031");
     userEvent.tab();

@@ -41,7 +41,7 @@ export const EngineerPage: FunctionComponent = () => {
         `https://www.airnowapi.org/aq/forecast/zipCode/?format=application/json&zipCode=${zip}&date=${date}&distance=50&API_KEY=8B47C42B-FCF9-4DA3-80DC-4FFA1C0E8664`
       );
       const data = airq.data;
-      if (data) {
+      if (data.length) {
         setAir(`${data[0].AQI} ${data[0].Category.Name}`);
       } else {
         setAir("NA");

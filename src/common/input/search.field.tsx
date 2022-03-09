@@ -8,6 +8,8 @@ export interface Props {
   placeholder?: string;
 
   onClick: (value: string) => void;
+
+  style?: React.CSSProperties;
 }
 
 export const Search: FunctionComponent<Props> = ({
@@ -15,6 +17,7 @@ export const Search: FunctionComponent<Props> = ({
   value = "",
   placeholder,
   onClick,
+  style = {},
 }: Props) => {
   const [internal, setInternal] = useValue(value);
   const [cid] = useId(id);
@@ -22,6 +25,7 @@ export const Search: FunctionComponent<Props> = ({
   return (
     <div style={{ display: "flex", alignItems: "flex-end" }}>
       <TextInput
+        style={style}
         placeholder={placeholder}
         id={cid}
         name="search"

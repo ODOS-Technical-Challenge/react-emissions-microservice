@@ -63,6 +63,7 @@ export const EngineerPage: FunctionComponent = () => {
   useEffect(() => {
     if (geoCoder && zip) {
       setTimeout(() => setLocation(zip), 1000);
+      console.log("geo ready");
     }
   }, [geoCoder]);
 
@@ -112,7 +113,7 @@ export const EngineerPage: FunctionComponent = () => {
           />
           <Label htmlFor="options">Exposure Type</Label>
           <Dropdown
-            id="input-dropdown"
+            id="options"
             name="input-dropdown"
             style={{ width: "100%" }}
           >
